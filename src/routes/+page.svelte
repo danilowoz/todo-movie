@@ -13,6 +13,6 @@
       0px 78px 78px 0px rgba(0, 0, 0, 0.42), 0px 176px 106px 0px rgba(0, 0, 0, 0.25),
       0px 313px 125px 0px rgba(0, 0, 0, 0.07), 0px 489px 137px 0px rgba(0, 0, 0, 0.01);
 
-    height: 50vh;
+    height: 70vh;
   }
 </style>

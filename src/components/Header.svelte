@@ -30,8 +30,8 @@
 </header>
 
 <style>
-header {
-  --step-width : 80px;
+  header {
+    --step-width: 80px;
   }
 
   .background-elements {
@@ -66,7 +66,8 @@ header {
     position: absolute;
     inset: 0;
     z-index: 3;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E") center;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")
+      center;
     filter: contrast(400%) brightness(90%) saturate(0);
     mix-blend-mode: color-burn;
     opacity: 0.4;
@@ -121,10 +122,11 @@ header {
     font-weight: normal;
     font-size: 72px;
 
-    padding-top: .5em;
+    padding-top: 0.5em;
     padding-left: calc(5 * var(--step-width) - 1.77em);
     line-height: 1;
-    text-shadow: 0px 1px var(--brand-color-red), -1px -1px var(--brand-color-blue), 1px 0px var(--brand-color-yellow);
+    text-shadow: 0px 1px var(--brand-color-red), -1px -1px var(--brand-color-blue),
+      1px 0px var(--brand-color-yellow);
     letter-spacing: 4px;
   }
 
