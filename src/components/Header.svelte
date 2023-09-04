@@ -62,7 +62,7 @@
     position: absolute;
     inset: 0;
     z-index: 3;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E") center;
     filter: contrast(400%) brightness(90%) saturate(0);
     mix-blend-mode: color-burn;
     opacity: 0.4;
@@ -123,7 +123,6 @@
   }
 
   .title span {
-    text-shadow: 0px 1px var(--brand-color-red), -2px -2px var(--brand-color-blue), 2px 0px var(--brand-color-yellow);
     opacity: 0.2;
   }
 
