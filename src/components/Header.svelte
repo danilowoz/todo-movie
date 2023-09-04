@@ -30,6 +30,10 @@
 </header>
 
 <style>
+header {
+  --step-width : 80px;
+  }
+
   .background-elements {
     position: absolute;
     z-index: 1;
@@ -52,8 +56,8 @@
 
   .glass_steps {
     backdrop-filter: blur(43px);
-    min-width: 80px;
-    max-width: 80px;
+    min-width: var(--step-width);
+    max-width: var(--step-width);
     height: 100%;
     filter: contrast(105%) saturate(1.2);
   }
@@ -107,8 +111,9 @@
     position: absolute;
     z-index: 9;
     inset: 0;
+    height: var(--header-height);
+    display: flex;
   }
-
 
   .title h1 {
     font-family: 'Koulen', sans-serif;
@@ -116,14 +121,16 @@
     font-weight: normal;
     font-size: 72px;
 
-    padding-top: 160px;
-    padding-left: 272px;
+    padding-top: .5em;
+    padding-left: calc(5 * var(--step-width) - 1.77em);
     line-height: 1;
     text-shadow: 0px 1px var(--brand-color-red), -1px -1px var(--brand-color-blue), 1px 0px var(--brand-color-yellow);
+    letter-spacing: 4px;
   }
 
   .title span {
-    opacity: 0.2;
+    opacity: 0.3;
+    letter-spacing: 0px;
   }
 
   .title p {
