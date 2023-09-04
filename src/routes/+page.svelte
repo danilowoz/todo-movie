@@ -1,59 +1,17 @@
-<script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
-</script>
-
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
+<div class="container stage" />
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+  .stage {
+    position: relative;
+    z-index: 9;
+    margin-top: var(--header-height);
+    background: linear-gradient(to bottom, hsla(0, 0%, 10.5%, 0.6) 0%, var(--gray-2) 30%);
+    border: 1px solid var(--gray-3);
+    border-radius: 8px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 20px 43px 0px rgba(0, 0, 0, 0.49),
+      0px 78px 78px 0px rgba(0, 0, 0, 0.42), 0px 176px 106px 0px rgba(0, 0, 0, 0.25),
+      0px 313px 125px 0px rgba(0, 0, 0, 0.07), 0px 489px 137px 0px rgba(0, 0, 0, 0.01);
 
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
+    height: 50vh;
+  }
 </style>
