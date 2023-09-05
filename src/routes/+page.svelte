@@ -1,5 +1,5 @@
 <script>
-  import { Tabs } from "../components/Tabs.svelte";
+  import Tabs from '../components/Tabs.svelte';
 </script>
 
 <div class="container">
@@ -21,6 +21,9 @@
       0px 313px 125px 0px rgba(0, 0, 0, 0.07), 0px 489px 137px 0px rgba(0, 0, 0, 0.01);
 
     height: 70vh;
+
+    padding: 1em;
+    display: flex;
+    justify-content: center;
   }
 </style>
-

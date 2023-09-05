@@ -1,11 +1,14 @@
 <script>
-    import "./tabs.css"
+  import './tabs.css';
 
-    let items = ["Default", "Last added", "Unsee"]
+  let items = ['Default', 'Last added', 'Unseen'];
+  let current = items[0];
 </script>
 
-<nav>
+<div>
+  <nav class="app-nav">
     {#each items as item}
-        <button>{item}</button>
+      <button class="app-nav_item" class:app-nav_item--active={current === item}>{item}</button>
     {/each}
-</nav>
+  </nav>
+</div>
