@@ -10,11 +10,3 @@
     <slot />
   </main>
 </div>
-
-<style>
-  :global(.container) {
-    width: 1280px;
-    margin: auto;
-    position: relative;
-  }
-</style>

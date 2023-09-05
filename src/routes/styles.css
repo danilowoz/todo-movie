@@ -1,7 +1,19 @@
+html,
 body {
   background: var(--gray-1);
+  width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-normal);
 }
 
 * {
   margin: 0;
+}
+
+.container {
+  padding: 0 1rem;
+  max-width: var(--container-width);
+  width: 100%;
+  margin: auto;
+  position: relative;
 }

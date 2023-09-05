@@ -1,11 +1,12 @@
-<div class="container stage" />
+<div class="container">
+  <div class="stage" />
+</div>
 
 <style>
   .stage {
     position: relative;
     z-index: 9;
     margin-top: var(--header-height);
-    /* background: linear-gradient(to bottom, hsla(0, 0%, 10.5%, 0.6) 0%, var(--gray-2) 30%); */
     background: hsla(0, 0%, 10.5%, 0.6);
     border: 1px solid var(--gray-3);
     border-radius: 8px;
