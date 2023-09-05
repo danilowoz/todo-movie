@@ -1,5 +1,11 @@
+<script>
+  import { Tabs } from "../components/Tabs.svelte";
+</script>
+
 <div class="container">
-  <div class="stage" />
+  <div class="stage">
+    <Tabs />
+  </div>
 </div>
 
 <style>
@@ -17,3 +23,4 @@
     height: 70vh;
   }
 </style>
+
