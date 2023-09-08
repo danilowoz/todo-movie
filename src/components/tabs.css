@@ -1,14 +1,31 @@
 .app-nav {
   display: inline-flex;
-  border-radius: 6px;
-  background: var(--gray-4);
-
-  padding: var(--space-1);
-  gap: var(--space-2);
-  
   justify-content: center;
   align-items: center;
-  
+  gap: var(--space-2);
+
+  padding: var(--space-1);
+  border-radius: 6px;
+  background: var(--gray-3);
+
+  position: relative;
+}
+
+.app-nav:before {
+  content: '';
+  position: absolute;
+  background: var(--gray-7);
+
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+
+  position: absolute;
+  top: var(--space-1);
+  bottom: var(--space-1);
+  left: var(--left, var(--space-1));
+  right: var(--right, 140px);
+
+  transition: left 0.2s ease-in-out, right 0.2s ease-in-out;
 }
 
 .app-nav_item {
@@ -17,13 +34,20 @@
   cursor: pointer;
 
   border-radius: 3px;
-  color: var(--gray-12);
+  color: var(--gray-10);
   font-size: var(--size-small);
 
   padding: var(--space-1) var(--space-2);
+  position: relative;
+  z-index: 1;
+
+  transition: color 0.2s ease-in-out;
+}
+
+.app-nav_item:hover:not(.app-nav_item--active) {
+  color: var(--gray-11);
 }
 
 .app-nav_item--active {
-  background: var(--gray-7);
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+  color: var(--gray-12);
 }
