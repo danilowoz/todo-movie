@@ -1,0 +1,30 @@
+.app-search {
+  position: relative;
+}
+
+.app-search_query,
+.app-search input {
+  background: none;
+  border: 0;
+  outline: none;
+  appearance: none;
+
+  font-size: var(--size-normal);
+  color: var(--gray-12);
+}
+
+.app-search input {
+  width: 100%;
+}
+
+.app-search_query {
+  visibility: hidden;
+}
+
+.app-search_predict {
+  font-size: var(--size-normal);
+  position: absolute;
+  top: 0;
+  color: var(--gray-8);
+  left: var(--cursor-offset);
+}

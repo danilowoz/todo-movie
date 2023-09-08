@@ -15,7 +15,7 @@
   }
 </script>
 
-<div>
+<div class="app-nav_container">
   <nav class="app-nav" style="--left: {leftPosition}px; --right: {rightPosition}px;">
     {#each items as item}
       <button
