@@ -49,6 +49,7 @@
   --space-1: calc(1rem / 4);
   --space-2: calc(1rem / 2);
   --space-3: 1rem;
+  --space-4: calc(1rem * 1.5);
 
   /* border-radius */
   --rounded-small: 3px;

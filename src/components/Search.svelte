@@ -110,7 +110,9 @@
   {#each results as result}
     {#if result.Title}
       <div on:mouseover={setSelection} on:mouseout={setInitialPosition} class="app-search_result">
-        {result.Title}
+        {#each result.Title.split(new RegExp(`(${query})`, 'gi')) as part}
+          <span class:query={part === query}>{part}</span>
+        {/each}
       </div>
     {/if}
   {/each}

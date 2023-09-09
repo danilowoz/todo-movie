@@ -18,6 +18,6 @@
     height: 100vh;
 
     padding: var(--space-3);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 </style>

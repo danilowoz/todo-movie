@@ -74,3 +74,7 @@
 .app-search_result:hover {
   color: var(--gray-12);
 }
+
+.app-search_result .query {
+  color: var(--gray-12);
+}
