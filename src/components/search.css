@@ -11,7 +11,7 @@
   content: '';
   background: var(--gray-3);
   padding: 0 var(--space-2);
-  border-radius: 6px;
+  border-radius: var(--rounded);
   position: absolute;
   top: var(--selection-offset, 0);
   opacity: var(--selection-opacity, 0);
@@ -64,7 +64,7 @@
 
 .app-search_result {
   padding: var(--space-2);
-  border-radius: 6px;
+  border-radius: var(--rounded);
   color: var(--gray-8);
   transition: color 150ms ease, background 150ms ease;
   cursor: pointer;

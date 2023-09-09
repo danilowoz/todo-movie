@@ -8,16 +8,16 @@
   .stage {
     position: relative;
     z-index: 9;
-    margin-top: var(--header-height);
     background: var(--gray-2);
     border: 1px solid var(--gray-3);
-    border-radius: 8px;
+    border-radius: var(--rounded-large);
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5), 0px 20px 43px 0px rgba(0, 0, 0, 0.49),
       0px 78px 78px 0px rgba(0, 0, 0, 0.42), 0px 176px 106px 0px rgba(0, 0, 0, 0.25),
       0px 313px 125px 0px rgba(0, 0, 0, 0.07), 0px 489px 137px 0px rgba(0, 0, 0, 0.01);
 
-    height: 70vh;
+    height: 100vh;
 
-    padding: 1em;
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
   }
 </style>
