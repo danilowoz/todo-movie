@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import './search.css';
   import { createCancellableFetch, createAPI } from '../utils/fetch';
 
@@ -8,7 +9,19 @@
   let predictTerm = null;
   let cursorOffset = 0;
   let results = [];
-  let resultItemIndexSelected = 0;
+  $: resultItemIndexSelected = -1;
+
+  function onInput(event: Event) {
+    const { target } = event;
+
+    query = target.value;
+
+    const queryWidth = document.querySelector('.app-search_query').getBoundingClientRect().width;
+    cursorOffset = queryWidth + 4;
+    predictTerm = '';
+
+    search(query);
+  }
 
   async function search(query) {
     try {
@@ -27,17 +40,40 @@
   function keyHandler(event) {
     const { code, preventDefault } = event;
     if (code === 'Tab' || code === 'Enter') {
-      query = predictTerm?.Title;
+      if (resultItemIndexSelected !== -1) {
+        query = results[resultItemIndexSelected]?.Title;
+      } else {
+        query = predictTerm?.Title;
+      }
+
       predictTerm = null;
 
+      goToTop();
       search(query);
+
       preventDefault();
     } else if (code === 'Escape') {
-      console.log('Escape');
+      goToTop();
     } else if (code === 'ArrowUp') {
-      resultItemIndexSelected = -1;
+      if (resultItemIndexSelected !== -1) {
+        resultItemIndexSelected -= 1;
+        onSelectedChange(resultItemIndexSelected);
+      }
     } else if (code === 'ArrowDown') {
-      resultItemIndexSelected = +1;
+      if (resultItemIndexSelected !== results.length - 1) {
+        resultItemIndexSelected += 1;
+        onSelectedChange(resultItemIndexSelected);
+      }
+    }
+  }
+
+  function onSelectedChange(index: number) {
+    let currentResult = document.querySelector(`.app-search_result:nth-child(${index + 1})`);
+
+    if (currentResult) {
+      onMouseOverResult({ target: currentResult });
+    } else {
+      onMouseOutResult();
     }
   }
 
@@ -45,32 +81,24 @@
     window.removeEventListener('keydown', keyHandler);
   }
 
-  function onSearch(event: Event) {
-    const { target } = event;
-    query = target.value;
-
-    const queryWidth = document.querySelector('.app-search_query').getBoundingClientRect().width;
-    cursorOffset = queryWidth + 4;
-    predictTerm = '';
-
-    search(query);
-  }
-
   let inputFocused = false;
   let selectionOpacity = 0;
-  function onBlur() {
+  let topOffset = 0;
+
+  function resetInterfaceState() {
     selectionOpacity = 0;
-    disposeKeyHandler();
     inputFocused = false;
+
+    goToTop();
+    disposeKeyHandler();
   }
 
-  function onFocus() {
+  function onSearchFocus() {
     selectionOpacity = 1;
     window.addEventListener('keydown', keyHandler);
     inputFocused = true;
   }
 
-  let topOffset = 0;
   function onMouseOverResult(event) {
     let target = event.target;
     if (!event.target.classList.contains('app-search_result')) {
@@ -82,45 +110,69 @@
   }
 
   function onMouseOutResult() {
-    topOffset = 0;
+    goToTop();
+
     if (!inputFocused) {
       selectionOpacity = 0;
     }
+  }
+
+  function goToTop() {
+    topOffset = 0;
+    resultItemIndexSelected = -1;
   }
 </script>
 
 <div
   class="app-search_container"
   style="--selection-offset: {topOffset}px; --selection-opacity: {selectionOpacity}"
+  on:mousemove={(event) => {
+    if (!inputFocused) {
+      selectionOpacity = 0.3;
+    }
+  }}
+  on:mouseout={() => {
+    if (!inputFocused) {
+      selectionOpacity = 0;
+    }
+  }}
 >
   <div class="app-search" style="--cursor-offset: {cursorOffset}px">
     <input
       bind:value={query}
-      on:input={onSearch}
-      on:focus={onFocus}
-      on:blur={onBlur}
+      on:input={onInput}
+      on:focus={onSearchFocus}
+      on:blur={resetInterfaceState}
+      on:keydown={(event) => {
+        if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
+          event.preventDefault();
+        }
+      }}
       type="search"
       placeholder="Search..."
     />
     <span class="app-search_query">{query}</span>
     {#if predictTerm}
-      <span class="app-search_predict"
-        >{predictTerm.Title.replace(new RegExp(query, 'gi'), '')}</span
-      >
+      <span class="app-search_predict">
+        {predictTerm.Title.replace(new RegExp(query, 'gi'), '')}
+      </span>
     {/if}
   </div>
 
-  {#each results as result}
-    {#if result.Title}
-      <div
-        on:mouseover={onMouseOverResult}
-        on:mouseout={onMouseOutResult}
-        class="app-search_result"
-      >
-        {#each result.Title.split(new RegExp(`(${query})`, 'gi')) as part}
-          <span on:mouseover on:mouseout class:query={part === query}>{part}</span>
-        {/each}
-      </div>
-    {/if}
-  {/each}
+  <div>
+    {#each results as result, index}
+      {#if result.Title}
+        <div
+          on:mouseover={onMouseOverResult}
+          on:mouseout={onMouseOutResult}
+          class="app-search_result"
+          class:app-search_result--selected={resultItemIndexSelected === index}
+        >
+          {#each result.Title.split(new RegExp(`(${query})`, 'gi')) as part}
+            <span on:mouseover on:mouseout class:query={part === query}>{part}</span>
+          {/each}
+        </div>
+      {/if}
+    {/each}
+  </div>
 </div>

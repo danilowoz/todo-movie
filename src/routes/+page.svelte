@@ -14,6 +14,6 @@
 
 <style>
   .app-content {
-    padding: 60px 80px;
+    padding: 60px 80px 120px;
   }
 </style>

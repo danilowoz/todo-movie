@@ -71,6 +71,7 @@
   position: relative;
 }
 
+.app-search_result--selected,
 .app-search_result:hover {
   color: var(--gray-12);
 }
