@@ -1,8 +1,8 @@
 <script lang="ts">
   import './search.css';
+  import { createCancellableFetch, createAPI } from '../utils/fetch';
 
-  let controller = new AbortController();
-  let signal = controller.signal;
+  const cancellableFetch = createCancellableFetch();
 
   let query = '';
   let predictTerm = null;
@@ -11,17 +11,7 @@
 
   async function search(query) {
     try {
-      // abort previous request
-      controller.abort();
-
-      // reassign signal
-      controller = new AbortController();
-      signal = controller.signal;
-
-      const response = await fetch(`https://www.omdbapi.com/?s=${query.trim()}&apikey=7ab33eb9`, {
-        signal
-      });
-      const data = await response.json();
+      const data = await cancellableFetch(createAPI({ search: query }));
 
       if (data.Search && data.Search[0].Title.match(new RegExp('^' + query, 'gi'))) {
         predictTerm = data.Search[0];
@@ -34,12 +24,19 @@
   }
 
   function tabHandler(event) {
-    if (event.code === 'Tab') {
+    const { code, preventDefault } = event;
+    if (code === 'Tab' || code === 'Enter') {
       query = predictTerm?.Title;
       predictTerm = null;
 
       search(query);
-      event.preventDefault();
+      preventDefault();
+    } else if (code === 'Escape') {
+      console.log('Escape');
+    } else if (code === 'ArrowUp') {
+      console.log('ArrowUp');
+    } else if (code === 'ArrowDown') {
+      console.log('ArrowDown');
     }
   }
 
@@ -58,34 +55,34 @@
     search(query);
   }
 
-  let focused = false;
+  let inputFocused = false;
   let selectionOpacity = 0;
   function onBlur() {
     selectionOpacity = 0;
     disposeTabHandler();
-    focused = false;
+    inputFocused = false;
   }
 
   function onFocus() {
     selectionOpacity = 1;
     window.addEventListener('keydown', tabHandler);
-    focused = true;
+    inputFocused = true;
   }
 
-  let topOffeset = 0;
+  let topOffset = 0;
   function onMouseOverResult(event) {
     let target = event.target;
-    if(!event.target.classList.contains('app-search_result')) {
-      target = event.target.parentElement
+    if (!event.target.classList.contains('app-search_result')) {
+      target = event.target.parentElement;
     }
 
-    topOffeset = target.offsetTop;
+    topOffset = target.offsetTop;
     selectionOpacity = 1;
   }
 
   function onMouseOutResult() {
-    topOffeset = 0;
-    if (!focused) {
+    topOffset = 0;
+    if (!inputFocused) {
       selectionOpacity = 0;
     }
   }
@@ -93,7 +90,7 @@
 
 <div
   class="app-search_container"
-  style="--selection-offset: {topOffeset}px; --selection-opacity: {selectionOpacity}"
+  style="--selection-offset: {topOffset}px; --selection-opacity: {selectionOpacity}"
 >
   <div class="app-search" style="--cursor-offset: {cursorOffset}px">
     <input
@@ -114,7 +111,11 @@
 
   {#each results as result}
     {#if result.Title}
-      <div on:mouseover={onMouseOverResult} on:mouseout={onMouseOutResult} class="app-search_result">
+      <div
+        on:mouseover={onMouseOverResult}
+        on:mouseout={onMouseOutResult}
+        class="app-search_result"
+      >
         {#each result.Title.split(new RegExp(`(${query})`, 'gi')) as part}
           <span on:mouseover on:mouseout class:query={part === query}>{part}</span>
         {/each}
