@@ -128,7 +128,7 @@
   style="--selection-offset: {topOffset}px; --selection-opacity: {selectionOpacity}"
   on:mousemove={(event) => {
     if (!inputFocused) {
-      selectionOpacity = 0.3;
+      selectionOpacity = 0.25;
     }
   }}
   on:mouseout={() => {
