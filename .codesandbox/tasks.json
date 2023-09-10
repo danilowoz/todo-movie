@@ -11,7 +11,7 @@
   "tasks": {
     "dev": {
       "name": "dev",
-      "command": "bun dev",
+      "command": "bun run dev",
       "runAtStart": true,
       "preview": {
         "port": 5173
@@ -19,12 +19,12 @@
     },
     "build": {
       "name": "build",
-      "command": "bun build",
+      "command": "bun run build",
       "runAtStart": false
     },
     "preview": {
       "name": "preview",
-      "command": "bun preview",
+      "command": "bun run preview",
       "runAtStart": false
     },
     "check": {
