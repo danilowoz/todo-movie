@@ -8,6 +8,7 @@
   let predictTerm = null;
   let cursorOffset = 0;
   let results = [];
+  let resultItemIndexSelected = 0;
 
   async function search(query) {
     try {
@@ -23,7 +24,7 @@
     }
   }
 
-  function tabHandler(event) {
+  function keyHandler(event) {
     const { code, preventDefault } = event;
     if (code === 'Tab' || code === 'Enter') {
       query = predictTerm?.Title;
@@ -34,14 +35,14 @@
     } else if (code === 'Escape') {
       console.log('Escape');
     } else if (code === 'ArrowUp') {
-      console.log('ArrowUp');
+      resultItemIndexSelected = -1;
     } else if (code === 'ArrowDown') {
-      console.log('ArrowDown');
+      resultItemIndexSelected = +1;
     }
   }
 
-  function disposeTabHandler() {
-    window.removeEventListener('keydown', tabHandler);
+  function disposeKeyHandler() {
+    window.removeEventListener('keydown', keyHandler);
   }
 
   function onSearch(event: Event) {
@@ -59,13 +60,13 @@
   let selectionOpacity = 0;
   function onBlur() {
     selectionOpacity = 0;
-    disposeTabHandler();
+    disposeKeyHandler();
     inputFocused = false;
   }
 
   function onFocus() {
     selectionOpacity = 1;
-    window.addEventListener('keydown', tabHandler);
+    window.addEventListener('keydown', keyHandler);
     inputFocused = true;
   }
 
