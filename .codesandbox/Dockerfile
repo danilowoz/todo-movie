@@ -1,2 +1,2 @@
 FROM node:20-bullseye
-RUN npm i pnpm -g
+RUN npm install -g bun

@@ -3,7 +3,7 @@
   "setupTasks": [
     {
       "name": "Install Dependencies",
-      "command": "pnpm install"
+      "command": "bun install"
     }
   ],
 
@@ -11,7 +11,7 @@
   "tasks": {
     "dev": {
       "name": "dev",
-      "command": "pnpm dev",
+      "command": "bun dev",
       "runAtStart": true,
       "preview": {
         "port": 5173
@@ -19,32 +19,32 @@
     },
     "build": {
       "name": "build",
-      "command": "pnpm build",
+      "command": "bun build",
       "runAtStart": false
     },
     "preview": {
       "name": "preview",
-      "command": "pnpm preview",
+      "command": "bun preview",
       "runAtStart": false
     },
     "check": {
       "name": "check",
-      "command": "pnpm check",
+      "command": "bun check",
       "runAtStart": false
     },
     "check:watch": {
       "name": "check:watch",
-      "command": "pnpm check:watch",
+      "command": "bun check:watch",
       "runAtStart": false
     },
     "lint": {
       "name": "lint",
-      "command": "pnpm lint",
+      "command": "bun lint",
       "runAtStart": false
     },
     "format": {
       "name": "format",
-      "command": "pnpm format",
+      "command": "bun format",
       "runAtStart": false
     }
   }
