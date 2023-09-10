@@ -73,12 +73,17 @@
   }
 
   let topOffeset = 0;
-  function setSelection(event) {
-    topOffeset = event.target.offsetTop;
+  function onMouseOverResult(event) {
+    let target = event.target;
+    if(!event.target.classList.contains('app-search_result')) {
+      target = event.target.parentElement
+    }
+
+    topOffeset = target.offsetTop;
     selectionOpacity = 1;
   }
 
-  function setInitialPosition() {
+  function onMouseOutResult() {
     topOffeset = 0;
     if (!focused) {
       selectionOpacity = 0;
@@ -109,9 +114,9 @@
 
   {#each results as result}
     {#if result.Title}
-      <div on:mouseover={setSelection} on:mouseout={setInitialPosition} class="app-search_result">
+      <div on:mouseover={onMouseOverResult} on:mouseout={onMouseOutResult} class="app-search_result">
         {#each result.Title.split(new RegExp(`(${query})`, 'gi')) as part}
-          <span class:query={part === query}>{part}</span>
+          <span on:mouseover on:mouseout class:query={part === query}>{part}</span>
         {/each}
       </div>
     {/if}
