@@ -5,7 +5,7 @@
   let current = items[0];
 
   let leftPosition = 4;
-  let rightPosition = 159;
+  let rightPosition = 218;
 
   function setActiveItem({ target }) {
     current = target.innerText;

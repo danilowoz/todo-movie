@@ -17,7 +17,7 @@
     query = target.value;
 
     const queryWidth = document.querySelector('.app-search_query').getBoundingClientRect().width;
-    cursorOffset = queryWidth + 4;
+    cursorOffset = queryWidth + 5;
     predictTerm = '';
 
     search(query);
@@ -82,12 +82,13 @@
   }
 
   let inputFocused = false;
-  let selectionOpacity = 0;
+  let selectionOpacity = 0.25;
   let topOffset = 0;
 
   function resetInterfaceState() {
-    selectionOpacity = 0;
+    selectionOpacity = 0.25;
     inputFocused = false;
+    results = [];
 
     goToTop();
     disposeKeyHandler();
@@ -113,7 +114,7 @@
     goToTop();
 
     if (!inputFocused) {
-      selectionOpacity = 0;
+      selectionOpacity = 0.25;
     }
   }
 
@@ -123,22 +124,29 @@
   }
 </script>
 
+<label class="app-search_label" for="search"
+  >Add a movie
+  {#if inputFocused && predictTerm}
+    <small>Press enter to select</small>
+  {/if}
+</label>
 <div
   class="app-search_container"
   style="--selection-offset: {topOffset}px; --selection-opacity: {selectionOpacity}"
   on:mousemove={(event) => {
     if (!inputFocused) {
-      selectionOpacity = 0.25;
+      selectionOpacity = 0.5;
     }
   }}
   on:mouseout={() => {
     if (!inputFocused) {
-      selectionOpacity = 0;
+      selectionOpacity = 0.25;
     }
   }}
 >
   <div class="app-search" style="--cursor-offset: {cursorOffset}px">
     <input
+      id="search"
       bind:value={query}
       on:input={onInput}
       on:focus={onSearchFocus}

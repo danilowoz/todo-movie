@@ -40,6 +40,7 @@
 
   --font-heading: 'Koulen', sans-serif;
   --font-normal: 'Inter', sans-serif;
+  --font-monospace: monospace;
 
   /* Layout */
   --header-height: 370px;
@@ -52,7 +53,10 @@
   --space-4: calc(1rem * 1.5);
 
   /* border-radius */
-  --rounded-small: 3px;
-  --rounded: calc(2 * var(--rounded-small));
-  --rounded-large: calc(3 * var(--rounded-small));
+  --rounded: 8px;
+  --rounded-large: calc(2 * var(--rounded));
+
+  /* transition */
+  --t-func: ease;
+  --t-speed: 150ms;
 }
