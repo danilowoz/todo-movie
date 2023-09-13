@@ -122,6 +122,6 @@
   font-weight: normal;
   font-size: var(--size-normal);
 
-  color: var(--gray-10);
+  color: var(--gray-11);
   margin-left: calc(var(--step-width) * 5);
 }
