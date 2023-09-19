@@ -36,7 +36,7 @@
   --h4: 1.823rem;
   --h5: 1.35rem; */
   --size-normal: 1rem;
-  --size-small: 0.8rem;
+  --size-small: 0.9rem;
 
   --font-heading: 'Koulen', sans-serif;
   --font-normal: 'Inter', sans-serif;
@@ -45,12 +45,16 @@
   /* Layout */
   --header-height: 370px;
   --container-width: 1280px;
+  --step-width: calc(var(--container-width) / 16);
 
   /* space */
   --space-1: calc(1rem / 4);
   --space-2: calc(1rem / 2);
   --space-3: 1rem;
   --space-4: calc(1rem * 1.5);
+  --space-5: calc(1rem * 2);
+  --space-6: calc(1rem * 2.5);
+  --space-7: calc(1rem * 3);
 
   /* border-radius */
   --rounded: 8px;

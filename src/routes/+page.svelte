@@ -2,6 +2,7 @@
   import Tabs from '../components/Tabs.svelte';
   import Stage from '../components/Stage.svelte';
   import Search from '../components/Search.svelte';
+  import Movies from '../components/Movies.svelte';
 </script>
 
 <Stage>
@@ -9,11 +10,13 @@
 
   <div class="app-content">
     <Search />
+
+    <Movies />
   </div>
 </Stage>
 
 <style>
   .app-content {
-    padding: 60px 80px 120px;
+    padding: calc(var(--step-width) * 1) calc(var(--step-width) * 2);
   }
 </style>

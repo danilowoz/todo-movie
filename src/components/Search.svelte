@@ -124,12 +124,6 @@
   }
 </script>
 
-<label class="app-search_label" for="search"
-  >Add a movie
-  {#if inputFocused && predictTerm}
-    <small>Press enter to select</small>
-  {/if}
-</label>
 <div
   class="app-search_container"
   style="--selection-offset: {topOffset}px; --selection-opacity: {selectionOpacity}"
