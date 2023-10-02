@@ -1,9 +1,11 @@
-export function createAPI({ search }: { search?: string }) {
+export function createAPI({ search, imdbID }: { search?: string; imdbID: string }) {
   const url = new URL(`https://www.omdbapi.com/`);
   url.searchParams.set('apikey', '7ab33eb9');
 
   if (search) {
     url.searchParams.set('s', search);
+  } else if (imdbID) {
+    url.searchParams.set('i', imdbID);
   }
 
   return url;

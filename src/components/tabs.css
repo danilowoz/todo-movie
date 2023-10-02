@@ -9,7 +9,7 @@
   align-items: center;
   gap: var(--space-2);
 
-  padding: var(--space-1);
+  padding: 4px 3px;
   border-radius: var(--rounded);
   background: var(--gray-3);
 
@@ -26,9 +26,9 @@
   background: var(--gray-5);
 
   position: absolute;
-  top: var(--space-1);
-  bottom: var(--space-1);
-  left: var(--left, var(--space-1));
+  top: 3px;
+  bottom: 3px;
+  left: var(--left, 3px);
   right: var(--right, 140px);
 
   transition: left var(--t-speed) var(--t-func), right var(--t-speed) var(--t-func);
@@ -42,7 +42,7 @@
   color: var(--gray-10);
   font-size: var(--size-small);
 
-  padding: var(--space-2) var(--space-3);
+  padding: 6px var(--space-3);
   position: relative;
   z-index: 1;
 

@@ -1,28 +1,10 @@
 <script>
   import './movies.css';
-
-  const data = [
-    {
-      title: 'The Postman Always Rings Twice',
-      length: '90 min',
-      category: 'Drama',
-      rate: '8.0',
-      description:
-        'Some things we can control, some we can’t. We can control our attitudes, opinions, goals and desires – choices of our own. We can’t control health, wealth, fame or power – things we can’t have by choosing them.'
-    },
-     {
-      title: 'The Postman Always Rings Twice',
-      length: '90 min',
-      category: 'Drama',
-      rate: '8.0',
-      description:
-        'Some things we can control, some we can’t. We can control our attitudes, opinions, goals and desires – choices of our own. We can’t control health, wealth, fame or power – things we can’t have by choosing them.'
-    }
-  ];
+  import { movies } from '../store/movies';
 </script>
 
 <ul class="movies">
-  {#each data as movie}
+  {#each $movies as movie}
     <li class="stack movie-item">
       <p class="movie-item_rate">{movie.rate}</p>
 

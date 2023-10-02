@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import './search.css';
+  import { onMount } from 'svelte';
+
   import { createCancellableFetch, createAPI } from '../utils/fetch';
+  import { clickOutside } from '../utils/clickOutside';
+  import { movies } from '../store/movies';
 
   const cancellableFetch = createCancellableFetch();
 
@@ -38,20 +41,16 @@
   }
 
   function keyHandler(event) {
-    const { code, preventDefault } = event;
+    const { code } = event;
     if (code === 'Tab' || code === 'Enter') {
+      let selectedItem = predictTerm;
+
       if (resultItemIndexSelected !== -1) {
         query = results[resultItemIndexSelected]?.Title;
-      } else {
-        query = predictTerm?.Title;
       }
 
-      predictTerm = null;
-
-      goToTop();
-      search(query);
-
-      preventDefault();
+      selectMovie(selectedItem.imdbID);
+      event.preventDefault();
     } else if (code === 'Escape') {
       goToTop();
     } else if (code === 'ArrowUp') {
@@ -59,12 +58,38 @@
         resultItemIndexSelected -= 1;
         onSelectedChange(resultItemIndexSelected);
       }
+      event.preventDefault();
     } else if (code === 'ArrowDown') {
       if (resultItemIndexSelected !== results.length - 1) {
         resultItemIndexSelected += 1;
         onSelectedChange(resultItemIndexSelected);
       }
+      event.preventDefault();
     }
+  }
+
+  function selectMovie(imdbID) {
+    addMovieToStore(imdbID);
+
+    predictTerm = null;
+    query = '';
+
+    resetInterfaceState();
+  }
+
+  async function addMovieToStore(imdbID) {
+    const fullMovie = await fetch(createAPI({ imdbID })).then((res) => res.json());
+
+    movies.update((prev) => [
+      ...prev,
+      {
+        title: fullMovie.Title,
+        length: fullMovie.Runtime,
+        category: fullMovie.Genre,
+        description: fullMovie.Plot,
+        rate: fullMovie.imdbRating
+      }
+    ]);
   }
 
   function onSelectedChange(index: number) {
@@ -90,6 +115,7 @@
     inputFocused = false;
     results = [];
 
+    search('');
     goToTop();
     disposeKeyHandler();
   }
@@ -125,6 +151,8 @@
 </script>
 
 <div
+  use:clickOutside
+  on:click_outside={resetInterfaceState}
   class="app-search_container"
   style="--selection-offset: {topOffset}px; --selection-opacity: {selectionOpacity}"
   on:mousemove={(event) => {
@@ -144,7 +172,6 @@
       bind:value={query}
       on:input={onInput}
       on:focus={onSearchFocus}
-      on:blur={resetInterfaceState}
       on:keydown={(event) => {
         if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
           event.preventDefault();
@@ -169,9 +196,12 @@
           on:mouseout={onMouseOutResult}
           class="app-search_result"
           class:app-search_result--selected={resultItemIndexSelected === index}
+          on:click={() => {
+            selectMovie(result.imdbID);
+          }}
         >
           {#each result.Title.split(new RegExp(`(${query})`, 'gi')) as part}
-            <span on:mouseover on:mouseout class:query={part === query}>{part}</span>
+            <span on:mouseover on:mouseout on:click class:query={part === query}>{part}</span>
           {/each}
         </div>
       {/if}
