@@ -17,6 +17,12 @@
 
 <style>
   .app-content {
-    padding: calc(var(--step-width) * 1) calc(var(--step-width) * 2);
+    padding: calc(var(--step-width) * 1) calc(var(--step-width) / 2);
+  }
+
+  @media (min-width: 1024px) {
+    .app-content {
+      padding: calc(var(--step-width) * 1) calc(var(--step-width) * 2);
+    }
   }
 </style>

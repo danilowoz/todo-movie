@@ -80,16 +80,7 @@
   async function addMovieToStore(imdbID) {
     const fullMovie = await fetch(createAPI({ imdbID })).then((res) => res.json());
 
-    movies.update((prev) => [
-      ...prev,
-      {
-        title: fullMovie.Title,
-        length: fullMovie.Runtime,
-        category: fullMovie.Genre,
-        description: fullMovie.Plot,
-        rate: fullMovie.imdbRating
-      }
-    ]);
+    movies.update((prev) => [...prev, { ...fullMovie, added: Date.now() }]);
   }
 
   function onSelectedChange(index: number) {
