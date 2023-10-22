@@ -16,10 +16,10 @@
           })
         );
 
-      case 'LastAdded':
+      case 'Last added':
         return derived(movies, (store) =>
           store.sort((a, b) => {
-            return a.added - b.added;
+            return new Date(b.added) - new Date(a.added);
           })
         );
 
@@ -40,12 +40,17 @@
   };
 
   $: data = getData()
+
+  function deleteMovie(id) {
+    movies.update((store) => store.filter((movie) => movie.imdbID !== id));
+  }
 </script>
 
 <ul class="movies">
   {#each $data as movie}
     <li class="stack movie-item">
       <p class="movie-item_rate">{movie.imdbRating}</p>
+      <button style="display: none" on:click={() => deleteMovie(movie.imdbID)}>delete</button>
 
       <div class="movie-item_info">
         <div class="stack movie-item_details">
